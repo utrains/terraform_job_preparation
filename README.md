@@ -45,7 +45,6 @@ Terraform Interview questions List 1
     - **It’s Scalable:** at any time we can increase **(scale up)** or decrease **(scale down)**  the number of resources in our infrastructure by simply modifying the configuration files and then running the **apply** command.
 
     - **Version Control:**code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
-
 ***
 
 - **What do you mean by Infrastructure as Code (IaC)?**
@@ -194,15 +193,29 @@ Terraform Interview questions List 1
 
       - **Example:** if a virtual machine references a security group, Terraform knows to create the security group first.
 
-|                                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| resource "aws\_security\_group" "utrains\_sg" {   // Security group configuration } resource "aws\_instance" "utrains\_ec2" {   ami       = "ami-123456"   instance\_type = "t2.micro"   security\_groups = \[aws\_security\_group.utrains\_sg.name] } |
+```
+resource "aws_security_group" "utrains_sg" {
+  // Security group configuration
+}
+
+resource "aws_instance" "utrains_ec2" {
+  ami       	= "ami-123456"
+  instance_type = "t2.micro"
+
+  security_groups = [aws_security_group.utrains_sg.name]
+}
+```
 
 - **Explicit Dependencies** - `depends_on` **Argument**: You can explicitly define dependencies using the `depends_on` argument. This is useful when you want to enforce a specific order of creation that Terraform might not infer automatically.
 
-|                                                                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| resource "aws\_instance" "utrains\_ec2" {   ami       = "ami-123456"   instance\_type = "t2.micro"   depends\_on = \[aws\_security\_group.utrains\_sg] } |
+```
+resource "aws_instance" "utrains_ec2" {
+  ami       	= "ami-123456"
+  instance_type = "t2.micro"
+
+  depends_on = [aws_security_group.utrains_sg]
+}
+```
 
 - **Graph Visualization :** You can visualize dependencies using the terraform graph command, which generates a visual representation of your resource dependencies. This can help in understanding how resources are interconnected.
 
@@ -260,17 +273,22 @@ Terraform Interview questions List 1
 
     - **Sensitive Variables:** You can mark input variables as sensitive using the `sensitive` attribute in the variable definition. This prevents Terraform from displaying their values in the command line output or in the state file.
 
-|                                                                 |
-| --------------------------------------------------------------- |
-| variable "db\_password" {   type  = string   sensitive = true } |
+```
+variable "db_password" {
+  type  	= string
+  sensitive = true
+}
+```
 
 - **Environment Variables :** Terraform can read sensitive data from environment variables. **This is particularly useful for credentials and secrets.** 
 
   - **Example**,you can set AWS  credentials as environment variables and reference them in your configuration.
 
-|                                                                                                                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| export AWS\_ACCESS\_KEY\_ID="your\_access\_key\_id" export AWS\_SECRET\_ACCESS\_KEY="your\_secret\_access\_key" export AWS\_SESSION\_TOKEN="your\_session\_token" # if using temporary credentials |
+```
+export AWS_ACCESS_KEY_ID="your_access_key_id"
+export AWS_SECRET_ACCESS_KEY="your_secret_access_key"
+export AWS_SESSION_TOKEN="your_session_token" # if using temporary credentials
+```
 
 - **Terraform Vault Provider :** Integrating with HashiCorp Vault allows Terraform to retrieve secrets dynamically at runtime. This keeps sensitive data out of your Terraform configurations and state files.
 
@@ -286,9 +304,13 @@ Terraform Interview questions List 1
 
     - **Provisioners**: You can attach provisioners (like `local-exec` or `remote-exec`) to a null resource to run scripts or commands. This can be useful for tasks like executing a script after a resource is created or configured.
 
-|                                                                                                         |
-| ------------------------------------------------------------------------------------------------------- |
-| resource "null\_resource" "example" {   provisioner "local-exec" { command = "echo Hello, World!"   } } |
+```
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+	command = "echo Hello, World!"
+  }
+}
+```
 
 - `remote-exec` can be used to run a script on a remote server, which will then install a set of tools.
 
@@ -346,10 +368,38 @@ Terraform's **declarative** approach makes it easier to manage infrastructure at
 
 5. If needed, you can roll back to blue by reversing the load balancer changes.
 
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| resource "aws\_lb" "example\_lb" {   name           = "example-lb"   internal       = false   load\_balancer\_type = "application" } resource "aws\_lb\_listener" "example\_listener" {   load\_balancer\_arn = aws\_lb.example\_lb.arn   port          = "80"   protocol      = "HTTP"    default\_action { type          = "forward" target\_group\_arn = aws\_lb\_target\_group.blue.arn   } } resource "aws\_lb\_target\_group" "blue" {   name = "blue-target-group"   port = 80   protocol = "HTTP"   vpc\_id   = var.vpc\_id } resource "aws\_lb\_target\_group" "green" {   name = "green-target-group"   port = 80   protocol = "HTTP"   vpc\_id   = var.vpc\_id } |
+```
+resource "aws_lb" "example_lb" {
+  name           	= "example-lb"
+  internal       	= false
+  load_balancer_type = "application"
+}
 
+resource "aws_lb_listener" "example_listener" {
+  load_balancer_arn = aws_lb.example_lb.arn
+  port          	= "80"
+  protocol      	= "HTTP"
+ 
+  default_action {
+	type         	= "forward"
+	target_group_arn = aws_lb_target_group.blue.arn
+  }
+}
+
+resource "aws_lb_target_group" "blue" {
+  name 	= "blue-target-group"
+  port 	= 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+}
+
+resource "aws_lb_target_group" "green" {
+  name 	= "green-target-group"
+  port 	= 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+}
+```
 ***
 
 - How does Terraform handle remote state management across multiple environments?
@@ -374,12 +424,17 @@ Terraform's **declarative** approach makes it easier to manage infrastructure at
 
 **Configuring Remote State in AWS S3 :** 
 
-|                                                                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **terraform {   backend "s3" { ****bucket = "my-terraform-state-bucket" ****key ****= "prod/terraform.tfstate" ****region = "us-west-2" ****dynamodb\_table = "terraform-state-lock"  # Optional: For state locking ****encrypt = true   } }** |
-
-\
-\
+```
+terraform {
+  backend "s3" {
+	bucket = "my-terraform-state-bucket"
+	key	= "prod/terraform.tfstate"
+	region = "us-west-2"
+	dynamodb_table = "terraform-state-lock"  # Optional: For state locking
+	encrypt = true
+  }
+}
+```
 
 
 - **Environment Segregation (Workspaces, Key-based Segmentation):** Terraform allows managing multiple environments (e.g., dev, staging, prod) by segregating state files either through workspaces or by organizing state files in separate paths using different keys within the backend.
