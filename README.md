@@ -1,8 +1,5 @@
-# terraform_job_preparation
+# Terraform_job_preparation
 Questions and exercice for job preparation in terraform
-
-Terraform Interview questions List 1
-
 
 ### **1. Introduction to Terraform**
 
@@ -26,30 +23,30 @@ Terraform Interview questions List 1
 
 **Solution of Basic Question:**
 
-- **What is Terraform, and why is it used in the context of infrastructure automation?**
+- **a. What is Terraform, and why is it used in the context of infrastructure automation?**
 
   - When we work on an infrastructure (machines, servers, services), we need to be able to manage it (create, delete, update, add tools, etc.) as quickly as possible. 
-
-  - To achieve this, we need to see our infrastructure as code that we can evolve to meet this need, hence the use of terraform which is an **declarative language**
-
-  - is an open-source **infrastructure as code (IaC)** tool developed by HashiCorp. 
+  - One way to achieve this is to define our Infrastructure requirements as **code** that we can version and manage easily. 
+  - Terraform is an **infrastructure as code (IaC)** tool developed by HashiCorp that uses a **declarative language** to automate the provisioning, configuration and management of infrastructure resources in various environments.
 
 ***
 
-- **Why should you use Terraform?**
+- **b. Why should you use Terraform?**
 
   - There are several reasons for using Terraform, including :
 
     - **It's multi-cloud:** for example, for companies using several clouds (AWS cloud, AZURE , etc.) Terraform remains compatible and can be used.
 
     - **It’s Scalable:** at any time we can increase **(scale up)** or decrease **(scale down)**  the number of resources in our infrastructure by simply modifying the configuration files and then running the **apply** command.
+    - **It is repeatable:** you can easily replicate the infrastructure for different environments(dev, staging, prod …)
 
-    - **Version Control:**code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
+    - **Version Control:** code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
+
 ***
 
-- **What do you mean by Infrastructure as Code (IaC)?**
+- **c. What do you mean by Infrastructure as Code (IaC)?**
 
-  - To answer this question, we would say that infrastructure is **seen as code**, as a program, similar to how software is developed. 
+  - To answer this question, we would say that infrastructure is **seen as code**, as a program, similar to how a software is developed. 
 
   - This will allow more consistent and repeatable deployment of resources (Server, Network, storage, ...).
 
@@ -57,7 +54,7 @@ Terraform Interview questions List 1
 
 ***
 
-- **What are the key features of Terraform?**
+- **d. What are the key features of Terraform?**
 
   - Terraform has a number of features that make it one of the most popular IaCs today. Our main features are : 
 
@@ -71,7 +68,7 @@ Terraform Interview questions List 1
 
 ***
 
-- **What is Terraform Cloud?**
+- **e. What is Terraform Cloud?**
 
   - Terraform Cloud is the Terraform feature that enables several people in a team to work on the same code. 
 
@@ -85,7 +82,7 @@ Terraform Interview questions List 1
 
 ***
 
-- **What are Terraform variables, and how can you use them?**
+- **f. What are Terraform variables, and how can you use them?**
 
   - Terraform variables are a way to **parameterize** your Terraform configurations, allowing you to make your code more **flexible** and **reusable**. 
 
@@ -107,7 +104,7 @@ Terraform Interview questions List 1
 
       - The terraform.tfvars is created. You can call this file in the terminal like :
 
- terraform apply -var-file="terraform.tfvars"
+ `terraform apply -var-file="terraform.tfvars"`
 
 - **Environment Variables**: Terraform allows you to set environment variables with a specific naming convention:
 
@@ -115,7 +112,7 @@ Terraform Interview questions List 1
 
 ***
 
-- **What is Terraform’s** `plan` **command, and what is its purpose?**
+- **g. What is Terraform’s** `plan` **command, and what is its purpose?**
 
   - The `terraform plan` command is a crucial part of the Terraform workflow. Its primary purpose is to generate an execution plan that outlines the changes Terraform will make to reach the desired state of your infrastructure as defined in your configuration files.
 
@@ -141,7 +138,7 @@ Terraform Interview questions List 1
 
 ***
 
-- **What are the use cases of Terraform?**
+- **h. What are the use cases of Terraform?**
 
   - Terraform has a wide range of use cases, from **resource management** (servers, storage, networks) to **cost optimization** in the cloud. In this case, we have :
 
@@ -169,7 +166,7 @@ Terraform Interview questions List 1
 \
 
 
-- **How does Terraform differ from other infrastructure-as-code tools like CloudFormation or Ansible?**
+- **i. How does Terraform differ from other infrastructure-as-code tools like CloudFormation or Ansible?**
 
   - Whether it's **Terraform**, **CloudFormation** or **Ansible**, they're all infrastructure-as-code (IaC) tools. Each of these tools has its strengths, and the best choice often depends on your **specific use case** and **environment**. The following table presents some comparisons of these tools at several levels:
 
@@ -185,7 +182,7 @@ Terraform Interview questions List 1
 
 ***
 
-- **How do you define dependencies in Terraform?**
+- **j. How do you define dependencies in Terraform?**
 
   - In Terraform, dependencies are defined automatically by resource references, but when creating resources for complex infrastructures, we sometimes implement dependencies to give terraform an execution order. This implies the existence of implicit dependencies, explicit dependencies and dependencies between modules : 
 
@@ -206,7 +203,7 @@ resource "aws_instance" "utrains_ec2" {
 }
 ```
 
-- **Explicit Dependencies** - `depends_on` **Argument**: You can explicitly define dependencies using the `depends_on` argument. This is useful when you want to enforce a specific order of creation that Terraform might not infer automatically.
+- **k. Explicit Dependencies** - `depends_on` **Argument**: You can explicitly define dependencies using the `depends_on` argument. This is useful when you want to enforce a specific order of creation that Terraform might not infer automatically.
 
 ```
 resource "aws_instance" "utrains_ec2" {
@@ -217,13 +214,13 @@ resource "aws_instance" "utrains_ec2" {
 }
 ```
 
-- **Graph Visualization :** You can visualize dependencies using the terraform graph command, which generates a visual representation of your resource dependencies. This can help in understanding how resources are interconnected.
+- **l. Graph Visualization :** You can visualize dependencies using the terraform graph command, which generates a visual representation of your resource dependencies. This can help in understanding how resources are interconnected.
 
 - By using resource references and the `depends_on` argument, Terraform effectively manages dependencies, ensuring that resources are created in the correct order. Understanding and managing these dependencies is crucial for creating a reliable and predictable infrastructure.
 
 ***
 
-- **How does Terraform ensure the idempotency of resource provisioning?**
+- **m. How does Terraform ensure the idempotency of resource provisioning?**
 
   - Through a combination of declarative configuration, state management, resource comparisons, and controlled execution phases, Terraform ensures that provisioning operations are idempotent. This means that applying the same configuration multiple times will yield the same result, preventing unintended changes or duplications in the infrastructure. Terraform ensures idempotency of resource provisioning through several mechanisms:
 
@@ -241,7 +238,7 @@ resource "aws_instance" "utrains_ec2" {
 
 ***
 
-- **Describe the lifecycle of a Terraform resource.**
+- **n. Describe the lifecycle of a Terraform resource.**
 
   - The lifecycle of a Terraform resource involves defining it, initializing the working environment, planning and applying changes, managing state, handling updates, and eventually destroying resources when needed. Lifecycle blocks add further control over how resources are created, updated, and destroyed, ensuring that infrastructure management is both efficient and safe. Here’s an overview of the key stages:
 
@@ -267,7 +264,7 @@ resource "aws_instance" "utrains_ec2" {
 
       - **ignore\_changes**: Specifies attributes that should not trigger updates when their values change outside of Terraform.
 
-* **How does Terraform handle secrets and sensitive data?**
+* **o. How does Terraform handle secrets and sensitive data?**
 
   - **Managing secrets and sensitive data** is crucial for terraform to  ensure that they are handled securely throughout the lifecycle of infrastructure provisioning. Here are the key strategies:
 
@@ -298,7 +295,7 @@ export AWS_SESSION_TOKEN="your_session_token" # if using temporary credentials
 
 ***
 
-- **What is a null resource in Terraform?**
+- **p. What is a null resource in Terraform?**
 
   - The null resource is a flexible and powerful tool in Terraform, allowing you to execute scripts, manage dependencies, and perform actions that don't fit neatly into the model of managing traditional infrastructure. It enhances the capabilities of Terraform beyond pure resource provisioning.
 
@@ -319,7 +316,7 @@ resource "null_resource" "example" {
 
 #### **Advanced Questions:**
 
-- **How does Terraform differ between the declarative and imperative approaches?**
+- **q. How does Terraform differ between the declarative and imperative approaches?**
 
   - Terraform is an infrastructure-as-code (IaC) tool that primarily follows a **declarative** approach, though it's essential to understand how this compares to the **imperative** approach, which is common in other programming paradigms and infrastructure management tools.
 
@@ -342,7 +339,7 @@ Terraform's **declarative** approach makes it easier to manage infrastructure at
 
 ***
 
-- **What are some advanced use cases of Terraform, such as blue-green deployments or immutable infrastructure?**
+- **r. What are some advanced use cases of Terraform, such as blue-green deployments or immutable infrastructure?**
 
   - Terraform is highly versatile and can be used for various advanced infrastructure management use cases, including blue-green deployments, immutable infrastructure, and more. Here are some **advanced use cases of Terraform** that leverage its capabilities to handle complex infrastructure needs : 
 
@@ -455,7 +452,7 @@ Each workspace will have its own state, so `terraform.tfstate` files will be seg
 
 ***
 
-- How can Terraform be used with infrastructure orchestration tools like Kubernetes or Docker Swarm?
+- **s. How can Terraform be used with infrastructure orchestration tools like Kubernetes or Docker Swarm?**
 
   - Terraform can be effectively used in combination with infrastructure orchestration tools like Kubernetes and Docker Swarm to automate the provisioning and management of containerized infrastructure. Terraform’s flexibility and provider-agnostic nature make it a powerful tool for creating and maintaining the underlying infrastructure for container orchestration platforms, as well as interacting with the orchestration platforms themselves to manage resources.
 
