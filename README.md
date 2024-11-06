@@ -153,7 +153,7 @@ Terraform Interview questions List 1
 
   - Terraform has a wide range of use cases, from **resource management** (servers, storage, networks) to **cost optimization** in the cloud. In this case, we have :
 
-    - **Infrastructure provisioning**: automating the creation and management of cloud resources, such as virtual machines, databases and network components.
+    - **Infrastructure provisioning**: automating the creation and management of cloud resources, such as virtual machines, databases and network components. e.g: "Automating the provisioning of AWS EC2 instances, RDS databases, and VPC components using Terraform ensures a consistent, repeatable setup across different environments".
 
     - **Environment management**: Create and manage multiple environments (development, test, production) with consistent configurations.
 
@@ -321,6 +321,8 @@ resource "null_resource" "example" {
 ```
 
 - `remote-exec` can be used to run a script on a remote server, which will then install a set of tools.
+
+- **Null Resource Caution**: Null resources are best for tasks that cannot be managed directly with Terraform (e.g., custom scripts), but they should not be overused since they can complicate Terraform state management and debugging
 
 ***
 
