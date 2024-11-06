@@ -455,7 +455,7 @@ Each workspace will have its own state, so `terraform.tfstate` files will be seg
 
 ***
 
-- How can Terraform be used with infrastructure orchestration tools like Kubernetes or Docker Swarm?
+- **18. How can Terraform be used with infrastructure orchestration tools like Kubernetes or Docker Swarm?**
 
   - Terraform can be effectively used in combination with infrastructure orchestration tools like Kubernetes and Docker Swarm to automate the provisioning and management of containerized infrastructure. Terraform’s flexibility and provider-agnostic nature make it a powerful tool for creating and maintaining the underlying infrastructure for container orchestration platforms, as well as interacting with the orchestration platforms themselves to manage resources.
 
