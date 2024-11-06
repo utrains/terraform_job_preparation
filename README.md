@@ -93,12 +93,10 @@ Questions and exercises for job preparation in terraform
 
 **Educational objective:**
 - Create the variables (input and output)
-- Experiment with the 3 ways of passing variables to the terraform code
+- Make an experimentation with the 3 ways of passing variables to the terraform code
 - Discuss the infrastructure creation plan
 
 ***
-
-\
 
 
 
@@ -108,184 +106,135 @@ Questions and exercises for job preparation in terraform
 ***
 
 - **8. What are the use cases of Terraform?**
-
   - Terraform has a wide range of use cases, from **resource management** (servers, storage, networks) to **cost optimization** in the cloud. In this case, we have :
-
-    - **Infrastructure provisioning**: automating the creation and management of cloud resources, such as virtual machines, databases and network components.
-
-    - **Environment management**: Create and manage multiple environments (development, test, production) with consistent configurations.
-
-    - **Infrastructure versioning**: Track changes to infrastructure configurations using version control, enabling rollbacks and historical tracking.
-
-    - **Cost management**: Optimize the use of cloud resources and monitor costs by automating the removal of unused resources.
-
-    - **Compliance and security**: Ensure that infrastructure meets compliance standards by defining policies in code.
-
-    - **Integration with CI/CD pipelines**: Automate infrastructure provisioning as part of continuous integration and delivery workflows.
-
-
-\
-
+    - **Infrastructure provisioning:** automating the creation and management of cloud resources, such as virtual machines, databases and network components.
+    - **Environment management:** Create and manage multiple environments (development, test, production) with consistent configurations.
+    - **Infrastructure versioning:** Track changes to infrastructure configurations using version control, enabling rollbacks and historical tracking.
+    - **Cost management:** Optimize the use of cloud resources and monitor costs by automating the removal of unused resources.
+    - **Compliance and security:** Ensure that infrastructure meets compliance standards by defining policies in code.
+    - **Integration with CI/CD pipelines:** Automate infrastructure provisioning as part of continuous integration and delivery workflows.
 
 ***
 
-\
-
-
 - **9. How does Terraform differ from other infrastructure-as-code tools like CloudFormation or Ansible?**
+  - **Terraform**, **CloudFormation** and **Ansible** are all infrastructure-as-code (IaC) tools. Each of these tools has its strengths, and the best choice often depends on your **specific use case** and **environment**. 
+  - The following table presents some comparisons of these tools at several levels:
 
-  - Whether it's **Terraform**, **CloudFormation** or **Ansible**, they're all infrastructure-as-code (IaC) tools. Each of these tools has its strengths, and the best choice often depends on your **specific use case** and **environment**. The following table presents some comparisons of these tools at several levels:
-
-|                                            |                                                                                                                                                          |                                                                                                               |                                                                                                                                 |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-|                                            | Terraform                                                                                                                                                | CloudFormation                                                                                                | Ansible                                                                                                                         |
-| Provider Support                           | Supports multiple cloud providers (aws, azure, GCP, etc.) and on-premises solution, enabling multi-cloud management from a single configuration language | Specific to AWS, allowing users to manage only AWS resources                                                  | Manage cloud resources and on-premises servers, but it’s primarily a configuration management tool                              |
-| Declarative, procedural an language syntax | **declarative** **approach**, uses the HashiCorp Configuration Language (HCL)                                                                            | **declarative** **approach**, Uses JSON and YAML                                                              | **Procedural**, Uses YAML for its playbooks, which is easy to read but focuses more on task execution than resource definition. |
-| State Management                           | Maintains a state file that tracks the current state of your infrastructure, enabling it to understand changes and dependencies effectively.             | Manages state internally, but does not expose it to users. It handles changes through stacks and change sets. | Does not maintain state in the same way; it applies changes directly to the infrastructure based on the playbook.               |
-| Community and Ecosystem                    | Has a large community and a wide array of modules and providers, making it easy to find reusable configurations.                                         | AWS-specific resources, with a strong focus on AWS services but less flexibility for other providers.         | Has a robust community, especially in configuration management and application deployment.                                      |
-| Use Cases                                  | Best for managing infrastructure provisioning and lifecycle across multiple providers.                                                                   | Ideal for AWS-centric environments where users want deep integration with AWS services.                       | More suited for configuration management and application deployment, especially in hybrid environments.                         |
-| Execution Model                            | Executes a plan before applying changes, allowing users to preview actions before they happen.                                                           | Updates are managed through stacks, but users cannot preview changes in the same way as Terraform’s plan.     | Executes tasks immediately as defined in the playbooks, without a separate planning phase.                                      |
+|                                             |                                                                                                                                                          |                                                                                                               |                                                                                                                                 |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+|                                             | Terraform                                                                                                                                                | CloudFormation                                                                                                | Ansible                                                                                                                         |
+| Provider Support                            | Supports multiple cloud providers (aws, azure, GCP, etc.) and on-premises solution, enabling multi-cloud management from a single configuration language | Specific to AWS, allowing users to manage only AWS resources                                                  | Manage cloud resources and on-premises servers, but it’s primarily a configuration management tool                              |
+| Declarative, procedural and language syntax | **declarative** **approach**, uses the HashiCorp Configuration Language (HCL)                                                                            | **declarative** **approach**, Uses JSON and YAML                                                              | **Procedural**, Uses YAML for its playbooks, which is easy to read but focuses more on task execution than resource definition. |
+| State Management                            | Maintains a state file that tracks the current state of your infrastructure, enabling it to understand changes and dependencies effectively.             | Manages state internally, but does not expose it to users. It handles changes through stacks and change sets. | Does not maintain state in the same way; it applies changes directly to the infrastructure based on the playbook.               |
+| Community and Ecosystem                     | Has a large community and a wide array of modules and providers, making it easy to find reusable configurations.                                         | AWS-specific resources, with a strong focus on AWS services but less flexibility for other providers.         | Has a robust community, especially in configuration management and application deployment.                                      |
+| Use Cases                                   | Best for managing infrastructure provisioning and lifecycle across multiple providers.                                                                   | Ideal for AWS-centric environments where users want deep integration with AWS services.                       | More suited for configuration management and application deployment, especially in hybrid environments.                         |
+| Execution Model                             | Executes a plan before applying changes, allowing users to preview actions before they happen.                                                           | Updates are managed through stacks, but users cannot preview changes in the same way as Terraform’s plan.     | Executes tasks immediately as defined in the playbooks, without a separate planning phase.                                      |
 
 ***
 
 - **10. How do you define dependencies in Terraform?**
-
-  - In Terraform, dependencies are defined automatically by resource references, but when creating resources for complex infrastructures, we sometimes implement dependencies to give terraform an execution order. This implies the existence of implicit dependencies, explicit dependencies and dependencies between modules : 
-
+  - In Terraform, dependencies are defined automatically by resource references, but when creating resources for complex infrastructures, we sometimes implement dependencies to give terraform an execution order. This implies the existence of __implicit dependencies__, __explicit dependencies__ and __dependencies between modules__ :
     - **Implicit Dependencies :** When a **resource references** another resource, Terraform automatically understands the dependency. 
-
       - **Example:** if a virtual machine references a security group, Terraform knows to create the security group first.
 
-```
-resource "aws_security_group" "utrains_sg" {
-  // Security group configuration
-}
+          ```
+          resource "aws_security_group" "utrains_sg" {
+            // Security group configuration
+          }
 
-resource "aws_instance" "utrains_ec2" {
-  ami       	= "ami-123456"
-  instance_type = "t2.micro"
+          resource "aws_instance" "utrains_ec2" {
+            ami       	= "ami-123456"
+            instance_type = "t2.micro"
 
-  security_groups = [aws_security_group.utrains_sg.name]
-}
-```
+            security_groups = [aws_security_group.utrains_sg.name]
+          }
+          ```
 
-- **Explicit Dependencies** - `depends_on` **Argument**: You can explicitly define dependencies using the `depends_on` argument. This is useful when you want to enforce a specific order of creation that Terraform might not infer automatically.
+    - **Explicit Dependencies** - `depends_on` **Argument**: You can explicitly define dependencies using the `depends_on` argument. This is useful when you want to enforce a specific order of creation that Terraform might not infer automatically.
 
-```
-resource "aws_instance" "utrains_ec2" {
-  ami       	= "ami-123456"
-  instance_type = "t2.micro"
+        ```
+        resource "aws_instance" "utrains_ec2" {
+          ami       	= "ami-123456"
+          instance_type = "t2.micro"
 
-  depends_on = [aws_security_group.utrains_sg]
-}
-```
+          depends_on = [aws_security_group.utrains_sg]
+        }
+        ```
 
 - **Graph Visualization :** You can visualize dependencies using the terraform graph command, which generates a visual representation of your resource dependencies. This can help in understanding how resources are interconnected.
-
 - By using resource references and the `depends_on` argument, Terraform effectively manages dependencies, ensuring that resources are created in the correct order. Understanding and managing these dependencies is crucial for creating a reliable and predictable infrastructure.
 
 ***
 
 - **11. How does Terraform ensure the idempotency of resource provisioning?**
-
   - Through a combination of declarative configuration, state management, resource comparisons, and controlled execution phases, Terraform ensures that provisioning operations are idempotent. This means that applying the same configuration multiple times will yield the same result, preventing unintended changes or duplications in the infrastructure. Terraform ensures idempotency of resource provisioning through several mechanisms:
-
-    -  **Declarative Configuration:** Terraform uses a declarative approach, where you specify the desired state of your infrastructure in configuration files. Terraform then compares the current state with the desired state and makes only the necessary changes to achieve that state.
-
-    -  **State Management:** Terraform maintains a state file that reflects the current state of the infrastructure. This file is used to track **resource attributes, dependencies, and metadata**. When you run `terraform apply`, Terraform reads the state file, compares it to the desired configuration, and determines the actions required to reach the specified state.
-
+    - **Declarative Configuration:** Terraform uses a declarative approach, where you specify the desired state of your infrastructure in configuration files. Terraform then compares the current state with the desired state and makes only the necessary changes to achieve that state.
+    - **State Management:** Terraform maintains a state file that reflects the current state of the infrastructure. This file is used to track **resource attributes, dependencies, and metadata**. When you run `terraform apply`, Terraform reads the state file, compares it to the desired configuration, and determines the actions required to reach the specified state.
     - **Resource Attributes Comparison:** Before **creating**, **updating**, or **deleting** resources, Terraform checks the existing attributes of each resource against the desired configuration. If the resource already matches the desired state, Terraform will not attempt to change it, thus ensuring idempotency.
-
     - **Plan and Apply Phases:** The `terraform plan` command creates an execution plan that shows the proposed changes without making any modifications. This allows users to review changes before applying them. If the current state matches the desired state, Terraform will report that no changes are necessary.
-
     - **Resource Lifecycle Management:** Terraform allows you to define resource lifecycle settings, such as `create_before_destroy` or `prevent_destroy`, which help manage how resources are created or modified. This adds an additional layer of control, contributing to idempotency.
-
     - **Error Handling:** If an error occurs during provisioning, Terraform will not leave the infrastructure in an inconsistent state. It will roll back changes if necessary, allowing the system to return to a stable state.
 
 ***
 
 - **12. Describe the lifecycle of a Terraform resource.**
-
   - The lifecycle of a Terraform resource involves defining it, initializing the working environment, planning and applying changes, managing state, handling updates, and eventually destroying resources when needed. Lifecycle blocks add further control over how resources are created, updated, and destroyed, ensuring that infrastructure management is both efficient and safe. Here’s an overview of the key stages:
-
-    - **Definition (Configuration)**: Resources are defined in Terraform configuration files using the HashiCorp Configuration Language (HCL). This includes specifying the resource type, its properties, and any dependencies.
-
-    - **Initialization (Terraform Init)**: Before any operations, you run `terraform init` to initialize the working directory. This command downloads the necessary provider plugins and sets up the backend for state management.
-
-    - **Planning (Terraform Plan)**: Running `terraform plan` generates an execution plan by comparing the desired state (as defined in the configuration) with the current state (stored in the state file). It identifies actions needed to create, update, or delete resources.
-
-    - **Application (Terraform Apply)**: When you execute `terraform apply`, Terraform performs the actions outlined in the execution plan. This can include creating new resources, updating existing ones, or destroying those that are no longer needed. Terraform applies changes in the order of dependencies to ensure a correct state.
-
-    - **State Management (State File)**: After applying changes, Terraform updates the state file to reflect the current state of the infrastructure. This file is crucial for tracking resource attributes, relationships, and metadata.
-
-    - **Updates (Resource Modification)**: When the configuration is modified (e.g., changing resource properties), running `terraform apply` again will trigger an update process. Terraform calculates the necessary changes based on the updated configuration and current state.
-
-    - **Destruction (Terraform Destroy)**: If resources are no longer needed, you can run `terraform destroy` to remove them. This command will also update the state file accordingly. The destruction process considers dependencies to ensure a safe removal order.
-
-    - **Lifecycle Blocks (Lifecycle Management)**: You can define lifecycle settings within a resource block to control its behavior. Key settings include:
-
-      - **create\_before\_destroy**: Ensures that a new resource is created before the old one is destroyed.
-
-      - **prevent\_destroy**: Prevents accidental deletion of a resource.
-
-      - **ignore\_changes**: Specifies attributes that should not trigger updates when their values change outside of Terraform.
+    - **Definition (Configuration):** Resources are defined in Terraform configuration files using the HashiCorp Configuration Language (HCL). This includes specifying the resource type, its properties, and any dependencies.
+    - **Initialization (terraform init):** Before any operations, you run `terraform init` to initialize the working directory. This command downloads the necessary provider plugins and sets up the backend for state management.
+    - **Planning (terraform plan):** Running `terraform plan` generates an execution plan by comparing the desired state (as defined in the configuration) with the current state (stored in the state file). It identifies actions needed to create, update, or delete resources.
+    - **Application (terraform apply):** When you execute `terraform apply`, Terraform performs the actions outlined in the execution plan. This can include creating new resources, updating existing ones, or destroying those that are no longer needed. Terraform applies changes in the order of dependencies to ensure a correct state.
+    - **State Management (state file):** After applying changes, Terraform updates the state file to reflect the current state of the infrastructure. This file is crucial for tracking resource attributes, relationships, and metadata.
+    - **Updates (Resource Modification):** When the configuration is modified (e.g., changing resource properties), running `terraform apply` again will trigger an update process. Terraform calculates the necessary changes based on the updated configuration and current state.
+    - **Destruction (terraform destroy):** If resources are no longer needed, you can run `terraform destroy` to remove them. This command will also update the state file accordingly. The destruction process considers dependencies to ensure a safe removal order.
+    - **Lifecycle Blocks (Lifecycle Management):** You can define lifecycle settings within a resource block to control its behavior. Key settings include:
+      - **create\_before\_destroy:** Ensures that a new resource is created before the old one is destroyed.
+      - **prevent\_destroy:** Prevents accidental deletion of a resource.
+      - **ignore\_changes:** Specifies attributes that should not trigger updates when their values change outside of Terraform.
 
 * **13. How does Terraform handle secrets and sensitive data?**
-
   - **Managing secrets and sensitive data** is crucial for terraform to  ensure that they are handled securely throughout the lifecycle of infrastructure provisioning. Here are the key strategies:
-
     - **Sensitive Variables:** You can mark input variables as sensitive using the `sensitive` attribute in the variable definition. This prevents Terraform from displaying their values in the command line output or in the state file.
 
-```
-variable "db_password" {
-  type  	= string
-  sensitive = true
-}
-```
+      ```
+      variable "db_password" {
+        type  	= string
+        sensitive = true
+      }
+      ```
+    - **Environment Variables :** Terraform can read sensitive data from environment variables. **This is particularly useful for credentials and secrets.** 
+      - **Example**,you can set AWS  credentials as environment variables and reference them in your configuration.
 
-- **Environment Variables :** Terraform can read sensitive data from environment variables. **This is particularly useful for credentials and secrets.** 
-
-  - **Example**,you can set AWS  credentials as environment variables and reference them in your configuration.
-
-```
-export AWS_ACCESS_KEY_ID="your_access_key_id"
-export AWS_SECRET_ACCESS_KEY="your_secret_access_key"
-export AWS_SESSION_TOKEN="your_session_token" # if using temporary credentials
-```
-
-- **Terraform Vault Provider :** Integrating with HashiCorp Vault allows Terraform to retrieve secrets dynamically at runtime. This keeps sensitive data out of your Terraform configurations and state files.
-
-- **State File Security :** The state file contains information about your resources, including sensitive data. You can encrypt the state file when using a remote backend (like S3 with server-side encryption) to protect this information. For local state files, ensure that file permissions restrict access to authorized users only.
-
-- **Terraform Cloud and Enterprise:** Terraform Cloud and Terraform Enterprise provide **built-in secret management capabilities**. You can store sensitive variables securely and manage access control to them.
+      ```
+      export AWS_ACCESS_KEY_ID="your_access_key_id"
+      export AWS_SECRET_ACCESS_KEY="your_secret_access_key"
+      export AWS_SESSION_TOKEN="your_session_token" # if using temporary credentials
+      ```
+    - **Terraform Vault Provider :** Integrating with HashiCorp Vault allows Terraform to retrieve secrets dynamically at runtime. This keeps sensitive data out of your Terraform configurations and state files.
+    - **State File Security :** The state file contains information about your resources, including sensitive data. You can encrypt the state file when using a remote backend (like S3 with server-side encryption) to protect this information. For local state files, ensure that file permissions restrict access to authorized users only.
+    - **Terraform Cloud and Enterprise:** Terraform Cloud and Terraform Enterprise provide **built-in secret management capabilities**. You can store sensitive variables securely and manage access control to them.
 
 ***
 
 - **14. What is a null resource in Terraform?**
-
-  - The null resource is a flexible and powerful tool in Terraform, allowing you to execute scripts, manage dependencies, and perform actions that don't fit neatly into the model of managing traditional infrastructure. It enhances the capabilities of Terraform beyond pure resource provisioning.
-
+  - The __null resource__ is a flexible and powerful tool in Terraform, allowing you to execute scripts, manage dependencies, and perform actions that don't fit neatly into the model of managing traditional infrastructure. It enhances the capabilities of Terraform beyond pure resource provisioning.
     - **Provisioners**: You can attach provisioners (like `local-exec` or `remote-exec`) to a null resource to run scripts or commands. This can be useful for tasks like executing a script after a resource is created or configured.
 
-```
-resource "null_resource" "example" {
-  provisioner "local-exec" {
-	command = "echo Hello, World!"
-  }
-}
-```
-
-- `remote-exec` can be used to run a script on a remote server, which will then install a set of tools.
+      ```
+      resource "null_resource" "example" {
+        provisioner "local-exec" {
+        command = "echo Hello, World!"
+        }
+      }
+      ```
+    - `remote-exec` can be used to run a script on a remote server, which will then install a set of tools.
+    - Null Resource Caution: Null resources are best for tasks that cannot be managed directly with Terraform (e.g., custom scripts), but they should not be overused since they can complicate Terraform state management and debugging
 
 ***
 
 
 #### **Advanced Questions:**
-
 - **15. How does Terraform differ between the declarative and imperative approaches?**
-
   - Terraform is an infrastructure-as-code (IaC) tool that primarily follows a **declarative** approach, though it's essential to understand how this compares to the **imperative** approach, which is common in other programming paradigms and infrastructure management tools.
-
   - In the declarative approach, you define the **desired state** of your infrastructure, and Terraform takes care of creating, updating, or deleting resources to achieve that state. You describe **what** the final configuration should look like, rather than the specific steps to get there.
 
 |                      |                                                                       |                                                        |
@@ -306,29 +255,18 @@ Terraform's **declarative** approach makes it easier to manage infrastructure at
 ***
 
 - **16. What are some advanced use cases of Terraform, such as blue-green deployments or immutable infrastructure?**
-
   - Terraform is highly versatile and can be used for various advanced infrastructure management use cases, including blue-green deployments, immutable infrastructure, and more. Here are some **advanced use cases of Terraform** that leverage its capabilities to handle complex infrastructure needs : 
-
-    - **Blue-Green Deployments** are a deployment strategy that helps reduce downtime and risk by running two identical environments (blue and green). One environment (let’s say blue) is live, while the other (green) is idle. The new version of the application is deployed to the idle environment (green), and after testing, traffic is switched from blue to green. If something goes wrong, the traffic can easily be reverted back.
-
+    - **Blue-Green Deployments:** are a deployment strategy that helps reduce downtime and risk by running two identical environments (blue and green). One environment (let’s say blue) is live, while the other (green) is idle. The new version of the application is deployed to the idle environment (green), and after testing, traffic is switched from blue to green. If something goes wrong, the traffic can easily be reverted back.
     - **Terraform Implementation:**
-
       - **Environment Duplication:** Terraform can be used to automate the provisioning of two identical environments, blue and green.
-
       - **Traffic Shifting:** Terraform can manage load balancers (e.g., AWS ALB, Google Cloud Load Balancer) to shift traffic between blue and green environments. By using **Terraform's** 
-
       - **resource dependency graph** and orchestration capabilities, traffic can smoothly transition without service interruption.
 
 **Steps:**
-
 1. Use Terraform to provision both environments (blue and green), ensuring that the same infrastructure is replicated.
-
 2. Deploy the new version of the application to the idle (green) environment.
-
 3. Use Terraform to update the load balancer to point traffic from blue to green.
-
 4. After validation, the green environment becomes live.
-
 5. If needed, you can roll back to blue by reversing the load balancer changes.
 
 ```
