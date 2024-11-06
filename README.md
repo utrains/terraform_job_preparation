@@ -8,7 +8,7 @@ Terraform Interview questions List 1
 
 #### **Basic Questions:**
 
-- What is Terraform, and why is it used in the context of infrastructure automation?
+- What is Terraform, and why is it used in the context of infrastructure automation? 
 
 - Why should you use Terraform?
 
@@ -28,11 +28,13 @@ Terraform Interview questions List 1
 
 - **What is Terraform, and why is it used in the context of infrastructure automation?**
 
-  - When we work on an infrastructure (machines, servers, services), we need to be able to manage it (create, delete, update, add tools, etc.) as quickly as possible. 
+  - When we work on an infrastructure (machines, servers, services), we need to be able to manage it (create, delete, update, add tools, etc.) as quickly and efficiently as possible.
+ 
+  - It can also be really hard to manage all the elements in the infrastructure manually without making mistakes.
 
-  - To achieve this, we need to see our infrastructure as code that we can evolve to meet this need, hence the use of terraform which is an **declarative language**
+  - This is where Terraform comes in and helps us to achieve these objectives.
 
-  - is an open-source **infrastructure as code (IaC)** tool developed by HashiCorp. 
+  - Terraform is a powerful tool for managing infrastructure in an automated, consistent, and efficient manner. It allows organizations to treat their infrastructure as code, leading to more reliable, scalable, and maintainable systems.
 
 ***
 
@@ -44,7 +46,9 @@ Terraform Interview questions List 1
 
     - **It’s Scalable:** at any time we can increase **(scale up)** or decrease **(scale down)**  the number of resources in our infrastructure by simply modifying the configuration files and then running the **apply** command.
 
-    - **Version Control:**code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
+    - **Version Control:** code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
+   
+    - **It’s more efficient and reliable:** You can define, preview, and apply changes to your infrastructure, reducing human errors and manual intervention
 ***
 
 - **What do you mean by Infrastructure as Code (IaC)?**
@@ -67,13 +71,15 @@ Terraform Interview questions List 1
 
     - **Multi-Provider Support**: Compatible with numerous cloud providers (like AWS, Azure, Google Cloud) and on-premises solutions, allowing users to manage diverse infrastructures from a **single tool**.
 
-    - **Remote Backends**: remote state storage options, enabling collaboration among team members and enhancing state management in team environments.
+    - **Remote Backends**: remote state storage options (like S3, Azure Storage, Terraform Cloud) enabling collaboration among team members and enhancing state management in team environments.
+   
+    - **State management**: Terraform manages the state of the infrastructure through a state file, which tracks created resources and their current configurations.
 
 ***
 
 - **What is Terraform Cloud?**
 
-  - Terraform Cloud is the Terraform feature that enables several people in a team to work on the same code. 
+  - Terraform Cloud is the Terraform **SaaS** feature that enables several people in a team to work on the same code. 
 
   - With terraform cloud, we see that the **state file** is stored in the cloud (S3 Bucket, S3 + MongoDB, Terraform Cloud, etc.), enabling collaborative work within the same source code.
 
@@ -118,6 +124,8 @@ Terraform Interview questions List 1
 - **What is Terraform’s** `plan` **command, and what is its purpose?**
 
   - The `terraform plan` command is a crucial part of the Terraform workflow. Its primary purpose is to generate an execution plan that outlines the changes Terraform will make to reach the desired state of your infrastructure as defined in your configuration files.
+ 
+  - This process helps users review changes carefully before applying them.
 
 **Exercise 1 :** When you arrive at the company, a problem arises on one of the web servers that was created with HyperV in Onpremise. On this server was deployed the company's website. You are asked to set up a prototype of infrastructure that will host this server in the cloud. Propose this architecture using the knowledge discussed in this part.
 
