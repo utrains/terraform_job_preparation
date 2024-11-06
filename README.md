@@ -1,7 +1,6 @@
-# terraform_job_preparation
-Questions and exercice for job preparation in terraform
+# Terraform job preparation
+Questions and exercises for job preparation in terraform
 
-Terraform Interview questions List 1
 
 
 ### **A. Introduction to Terraform**
@@ -29,10 +28,8 @@ Terraform Interview questions List 1
 - **1. What is Terraform, and why is it used in the context of infrastructure automation?**
 
   - When we work on an infrastructure (machines, servers, services), we need to be able to manage it (create, delete, update, add tools, etc.) as quickly as possible. 
-
-  - To achieve this, we need to see our infrastructure as code that we can evolve to meet this need, hence the use of terraform which is an **declarative language**
-
-  - is an open-source **infrastructure as code (IaC)** tool developed by HashiCorp. 
+  - It can also be really hard to manage all the elements in the infrastructure manually without making mistakes. This is where Terraform comes in and helps us to achieve these objectives.
+  - __Terraform__ is an infrastructure as code (IaC) tool developed by HashiCorp that uses a declarative language to automate the provisioning, configuration and management of infrastructure resources in various environments.
 
 ***
 
@@ -40,19 +37,14 @@ Terraform Interview questions List 1
 
   - There are several reasons for using Terraform, including :
 
-    - **It's multi-cloud:** for example, for companies using several clouds (AWS cloud, AZURE , etc.) Terraform remains compatible and can be used.
-
+    - **It's multi-cloud:** for companies that use several clouds (AWS cloud, AZURE , etc.), Terraform can be used since it's compatible with multiple cloud providers. 
     - **It’s Scalable:** at any time we can increase **(scale up)** or decrease **(scale down)**  the number of resources in our infrastructure by simply modifying the configuration files and then running the **apply** command.
-
-    - **Version Control:**code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
+    - **Version Control:** code written with terraform supports several version control tools (github, gitlab, bitbucket, ...)
 ***
 
 - **3. What do you mean by Infrastructure as Code (IaC)?**
-
   - To answer this question, we would say that infrastructure is **seen as code**, as a program, similar to how software is developed. 
-
-  - This will allow more consistent and repeatable deployment of resources (Server, Network, storage, ...).
-
+  - This will allow more __consistent__ and __repeatable__ deployment of resources (Server, Network, storage, ...).
   - Finally, the **manual resource creation process** will be replaced by an **automatic process managed** by an IaC.
 
 ***
@@ -60,78 +52,52 @@ Terraform Interview questions List 1
 - **4. What are the key features of Terraform?**
 
   - Terraform has a number of features that make it one of the most popular IaCs today. Our main features are : 
-
     - **Resource graph:** resource creation is based on a dependency graph. This makes it possible to create resources that have no parallel dependencies, thus improving infrastructure creation time.
-
-    - **Modular Design:** terraform's module concept allows us to create modules, then call them up in various parts of our code. This is best practice, as it **reduces duplication**, and makes configurations more manageable.
-
-    - **Multi-Provider Support**: Compatible with numerous cloud providers (like AWS, Azure, Google Cloud) and on-premises solutions, allowing users to manage diverse infrastructures from a **single tool**.
-
-    - **Remote Backends**: remote state storage options, enabling collaboration among team members and enhancing state management in team environments.
+    - **Modular Design:** terraform's module concept allows us to create modules, then call them up in various parts of our code. This is best practice, as it **reduces duplication**, and makes configurations more easy to reuse.
+    - **Multi-Provider Support:** Compatible with numerous cloud providers (like AWS, Azure, Google Cloud) and on-premises solutions, allowing users to manage diverse infrastructures from a **single tool**.
+    - **Remote Backends:** remote state storage options, enabling collaboration among team members and enhancing state management in team environments.
 
 ***
 
 - **5. What is Terraform Cloud?**
-
-  - Terraform Cloud is the Terraform feature that enables several people in a team to work on the same code. 
-
+  - __Terraform Cloud__ is the Terraform __SaaS__ feature that enables several people in a team to work on the same code. 
   - With terraform cloud, we see that the **state file** is stored in the cloud (S3 Bucket, S3 + MongoDB, Terraform Cloud, etc.), enabling collaborative work within the same source code.
-
   - Terraform Cloud integrates with **version control systems** (like GitHub, GitLab, and Bitbucket), enabling automated plans and applies based on pull requests or commits.
-
-  - with terraform cloud, the state file is more secure, and can implement the Lock mechanism
-
+  - With terraform cloud, the state file is more secure, and can implement the __state locking__ mechanism
   - In summary, Terraform Cloud extends the capabilities of Terraform, making it easier for teams to **collaborate** on infrastructure projects while ensuring best practices in management, **compliance**, and **security**.
 
 ***
 
 - **6. What are Terraform variables, and how can you use them?**
-
-  - Terraform variables are a way to **parameterize** your Terraform configurations, allowing you to make your code more **flexible** and **reusable**. 
-
+  - Terraform variables are a way to **parameterize** your Terraform configurations, allowing your code to be more **flexible** and **reusable**. 
   - We have several types of variables:
-
     - **Input Variables:** These are values that you define in your Terraform configuration that can be passed into the module or configuration from outside. 
-
     - **Output Variables:** These are used to extract information from your Terraform configurations after deployment. 
-
   - There are several ways to pass the value of a variable in a terraform code : 
-
     - **Command Line**: When running Terraform commands, you can use the `-var` flag to specify variable values:
-
-      - Exp : terraform apply -var="region=us-west-2"
-
+      - __Exp :__ terraform apply -var="region=us-west-2"
     - **Variable Files**: You can create a `.tfvars` file (e.g., `terraform.tfvars`) to specify variable values 
+      - __Exp :__ cat "region=us-west-2"> terraform.tfvars
+      - The terraform.tfvars is created. You can call this file in the terminal like : ```terraform apply -var-file="terraform.tfvars"```
 
-      -  Exp : cat "region=us-west-2"> terraform.tfvars
-
-      - The terraform.tfvars is created. You can call this file in the terminal like :
-
- terraform apply -var-file="terraform.tfvars"
-
-- **Environment Variables**: Terraform allows you to set environment variables with a specific naming convention:
-
-  - Exp : export TF\_VAR\_region="us-west-2"
+    - **Environment Variables** : Terraform allows you to set environment variables with a specific naming convention:
+      - __Exp :__ export TF\_VAR\_region="us-west-2"
 
 ***
 
-- **7. What is Terraform’s** `plan` **command, and what is its purpose?**
-
+- **7. What's terraform plan command, and what is its purpose?**
   - The `terraform plan` command is a crucial part of the Terraform workflow. Its primary purpose is to generate an execution plan that outlines the changes Terraform will make to reach the desired state of your infrastructure as defined in your configuration files.
+  - This process helps users to review changes carefully before applying them.
 
-**Exercise 1 :** When you arrive at the company, a problem arises on one of the web servers that was created with HyperV in Onpremise. On this server was deployed the company's website. You are asked to set up a prototype of infrastructure that will host this server in the cloud. Propose this architecture using the knowledge discussed in this part.
+**Exercise 1 :** When you arrive at the company, a problem arises on one of the web servers that was created with HyperV __on-premise__. On this server was deployed the company's website. You are asked to set up a prototype of infrastructure that will host this server in the cloud. Propose this architecture using the knowledge discussed in this part.
 
 **Educational objective:**
-
-- create the variables (input and output)
-
-- experiment with the 3 ways of passing variables to the terraform code
-
-- discuss the infrastructure creation plan
+- Create the variables (input and output)
+- Experiment with the 3 ways of passing variables to the terraform code
+- Discuss the infrastructure creation plan
 
 ***
 
-\
 \
 \
 
@@ -157,9 +123,6 @@ Terraform Interview questions List 1
 
     - **Integration with CI/CD pipelines**: Automate infrastructure provisioning as part of continuous integration and delivery workflows.
 
-\
-\
-\
 \
 \
 
