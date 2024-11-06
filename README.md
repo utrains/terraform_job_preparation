@@ -1,5 +1,5 @@
 # terraform_job_preparation
-Questions and exercice for job preparation in terraform
+Questions and exercices for job preparation in terraform
 
 Terraform Interview questions List 1
 
@@ -30,9 +30,9 @@ Terraform Interview questions List 1
 
   - When we work on an infrastructure (machines, servers, services), we need to be able to manage it (create, delete, update, add tools, etc.) as quickly as possible. 
 
-  - To achieve this, we need to see our infrastructure as code that we can evolve to meet this need, hence the use of terraform which is an **declarative language**
+  - To achieve this, we need to choose an infrastructure as code that can evolve to meet this need. This is why we use Terraform, which is a **declarative language**
 
-  - is an open-source **infrastructure as code (IaC)** tool developed by HashiCorp. 
+  - is an **infrastructure as code (IaC)** tool developed by HashiCorp. 
 
 ***
 
@@ -40,7 +40,7 @@ Terraform Interview questions List 1
 
   - There are several reasons for using Terraform, including :
 
-    - **It's multi-cloud:** for example, for companies using several clouds (AWS cloud, AZURE , etc.) Terraform remains compatible and can be used.
+    - **It's multi-cloud:** for example, for companies that use several clouds (AWS cloud, AZURE , etc.), Terraform can be used since it's compatible with multiple cloud providers.
 
     - **It’s Scalable:** at any time we can increase **(scale up)** or decrease **(scale down)**  the number of resources in our infrastructure by simply modifying the configuration files and then running the **apply** command.
 
@@ -49,7 +49,7 @@ Terraform Interview questions List 1
 
 - **What do you mean by Infrastructure as Code (IaC)?**
 
-  - To answer this question, we would say that infrastructure is **seen as code**, as a program, similar to how software is developed. 
+  - To answer this question, we would say that infrastructure's configuration is **seen as code**, as a program, similar to how software is developed. 
 
   - This will allow more consistent and repeatable deployment of resources (Server, Network, storage, ...).
 
@@ -63,7 +63,7 @@ Terraform Interview questions List 1
 
     - **Resource graph:** resource creation is based on a dependency graph. This makes it possible to create resources that have no parallel dependencies, thus improving infrastructure creation time.
 
-    - **Modular Design:** terraform's module concept allows us to create modules, then call them up in various parts of our code. This is best practice, as it **reduces duplication**, and makes configurations more manageable.
+    - **Modular Design:** terraform's module concept allows us to create modules, then call them up in various parts of our code. This is best practice, as it **reduces duplication**, and makes configurations easy to reuse.
 
     - **Multi-Provider Support**: Compatible with numerous cloud providers (like AWS, Azure, Google Cloud) and on-premises solutions, allowing users to manage diverse infrastructures from a **single tool**.
 
@@ -75,11 +75,11 @@ Terraform Interview questions List 1
 
   - Terraform Cloud is the Terraform feature that enables several people in a team to work on the same code. 
 
-  - With terraform cloud, we see that the **state file** is stored in the cloud (S3 Bucket, S3 + MongoDB, Terraform Cloud, etc.), enabling collaborative work within the same source code.
+  - With Terraform cloud, we see that the **state file** is stored in the cloud (S3 Bucket, S3 + MongoDB, Terraform Cloud, etc.), enabling collaborative work within the same source code.
 
   - Terraform Cloud integrates with **version control systems** (like GitHub, GitLab, and Bitbucket), enabling automated plans and applies based on pull requests or commits.
 
-  - with terraform cloud, the state file is more secure, and can implement the Lock mechanism
+  - With Terraform cloud, the state file is more secure, and can implement the Lock mechanism
 
   - In summary, Terraform Cloud extends the capabilities of Terraform, making it easier for teams to **collaborate** on infrastructure projects while ensuring best practices in management, **compliance**, and **security**.
 
@@ -87,7 +87,7 @@ Terraform Interview questions List 1
 
 - **What are Terraform variables, and how can you use them?**
 
-  - Terraform variables are a way to **parameterize** your Terraform configurations, allowing you to make your code more **flexible** and **reusable**. 
+  - Terraform variables are a way to **parameterize** your Terraform configurations, allowing your code to be more **flexible** and **reusable**. 
 
   - We have several types of variables:
 
@@ -107,7 +107,7 @@ Terraform Interview questions List 1
 
       - The terraform.tfvars is created. You can call this file in the terminal like :
 
- terraform apply -var-file="terraform.tfvars"
+         terraform apply -var-file="terraform.tfvars"
 
 - **Environment Variables**: Terraform allows you to set environment variables with a specific naming convention:
 
@@ -119,15 +119,15 @@ Terraform Interview questions List 1
 
   - The `terraform plan` command is a crucial part of the Terraform workflow. Its primary purpose is to generate an execution plan that outlines the changes Terraform will make to reach the desired state of your infrastructure as defined in your configuration files.
 
-**Exercise 1 :** When you arrive at the company, a problem arises on one of the web servers that was created with HyperV in Onpremise. On this server was deployed the company's website. You are asked to set up a prototype of infrastructure that will host this server in the cloud. Propose this architecture using the knowledge discussed in this part.
+**Exercise 1 :** When you arrive at the company, a problem arises on one of the web servers that was created Onpremise with HyperV. On this server was deployed the company's website. You are asked to set up a prototype of infrastructure that will host this server in the cloud. Propose this architecture using the knowledge discussed in this part.
 
 **Educational objective:**
 
-- create the variables (input and output)
+- Create the variables (input and output)
 
-- experiment with the 3 ways of passing variables to the terraform code
+- Make an experimentation with the 3 ways of passing variables to the terraform code
 
-- discuss the infrastructure creation plan
+- Explain the creation process of the infrastructure
 
 ***
 
@@ -171,17 +171,17 @@ Terraform Interview questions List 1
 
 - **How does Terraform differ from other infrastructure-as-code tools like CloudFormation or Ansible?**
 
-  - Whether it's **Terraform**, **CloudFormation** or **Ansible**, they're all infrastructure-as-code (IaC) tools. Each of these tools has its strengths, and the best choice often depends on your **specific use case** and **environment**. The following table presents some comparisons of these tools at several levels:
+  - **Terraform**, **CloudFormation** and **Ansible** are all infrastructure-as-code (IaC) tools. Each of these tools has its strengths, and the best choice often depends on your **specific use cases** and **environments**. The following table presents some comparisons of these tools at several levels:
 
 |                                            |                                                                                                                                                          |                                                                                                               |                                                                                                                                 |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 |                                            | Terraform                                                                                                                                                | CloudFormation                                                                                                | Ansible                                                                                                                         |
-| Provider Support                           | Supports multiple cloud providers (aws, azure, GCP, etc.) and on-premises solution, enabling multi-cloud management from a single configuration language | Specific to AWS, allowing users to manage only AWS resources                                                  | Manage cloud resources and on-premises servers, but it’s primarily a configuration management tool                              |
-| Declarative, procedural an language syntax | **declarative** **approach**, uses the HashiCorp Configuration Language (HCL)                                                                            | **declarative** **approach**, Uses JSON and YAML                                                              | **Procedural**, Uses YAML for its playbooks, which is easy to read but focuses more on task execution than resource definition. |
+| Provider Support                           | Supports multiple cloud providers (aws, azure, GCP, etc.) and on-premises solutions, enabling multi-cloud management from a single configuration language | Specific to AWS, allowing users to manage only AWS resources                                                  | Manage cloud resources and on-premises servers, but it’s primarily a configuration management tool                              |
+| Declarative, procedural and language syntax | **declarative** **approach**, uses the HashiCorp Configuration Language (HCL)                                                                            | **declarative** **approach**, Uses JSON and YAML                                                              | **Procedural**, Uses YAML for its playbooks, which is easy to read but focuses more on task execution than resource definition. |
 | State Management                           | Maintains a state file that tracks the current state of your infrastructure, enabling it to understand changes and dependencies effectively.             | Manages state internally, but does not expose it to users. It handles changes through stacks and change sets. | Does not maintain state in the same way; it applies changes directly to the infrastructure based on the playbook.               |
 | Community and Ecosystem                    | Has a large community and a wide array of modules and providers, making it easy to find reusable configurations.                                         | AWS-specific resources, with a strong focus on AWS services but less flexibility for other providers.         | Has a robust community, especially in configuration management and application deployment.                                      |
 | Use Cases                                  | Best for managing infrastructure provisioning and lifecycle across multiple providers.                                                                   | Ideal for AWS-centric environments where users want deep integration with AWS services.                       | More suited for configuration management and application deployment, especially in hybrid environments.                         |
-| Execution Model                            | Executes a plan before applying changes, allowing users to preview actions before they happen.                                                           | Updates are managed through stacks, but users cannot preview changes in the same way as Terraform’s plan.     | Executes tasks immediately as defined in the playbooks, without a separate planning phase.                                      |
+| Execution process                            | Executes a plan before applying changes, allowing users to preview actions before they happen.                                                           | Updates are managed through stacks, but users cannot preview changes in the same way as Terraform’s plan.     | Executes tasks immediately as defined in the playbooks, without a separate planning phase.                                      |
 
 ***
 
@@ -247,7 +247,7 @@ resource "aws_instance" "utrains_ec2" {
 
     - **Definition (Configuration)**: Resources are defined in Terraform configuration files using the HashiCorp Configuration Language (HCL). This includes specifying the resource type, its properties, and any dependencies.
 
-    - **Initialization (Terraform Init)**: Before any operations, you run `terraform init` to initialize the working directory. This command downloads the necessary provider plugins and sets up the backend for state management.
+    - **Initialization (Terraform Init)**: Before any operation, you run `terraform init` to initialize the working directory. This command downloads the necessary provider plugins and sets up the backend for state management.
 
     - **Planning (Terraform Plan)**: Running `terraform plan` generates an execution plan by comparing the desired state (as defined in the configuration) with the current state (stored in the state file). It identifies actions needed to create, update, or delete resources.
 
