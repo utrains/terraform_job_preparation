@@ -99,7 +99,7 @@ Questions and exercises for job preparation in terraform
 ***
 
 \
-\
+
 
 
 
@@ -123,7 +123,7 @@ Questions and exercises for job preparation in terraform
 
     - **Integration with CI/CD pipelines**: Automate infrastructure provisioning as part of continuous integration and delivery workflows.
 
-\
+
 \
 
 
