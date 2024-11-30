@@ -378,5 +378,12 @@ Each workspace will have its own state, so `terraform.tfstate` files will be seg
 
         -
 
-**Exercice: Provisioning an EKS Cluster on AWS using terraform**
+
+# Exercise 2: Setting Up a CI/CD Pipeline for Terraform with GitHub Actions
+
+__Objective:__
+The goal of this exercise is to create a CI/CD pipeline for automating the deployment and management of infrastructure using Terraform. This pipeline will be implemented using GitHub Actions, which automates tasks such as validating, formatting, planning, and applying Terraform configurations.
+
+__Note:__ For the application of this exercise, you can use the repository from your Exercise 1 or another Terraform repository of your choice.
+
 
