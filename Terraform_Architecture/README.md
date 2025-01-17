@@ -16,7 +16,7 @@
 
 - Terraform Core, together with providers and modules, makes Terraform a powerful tool for managing complex infrastructures consistently and declaratively. Terraform Core’s have many Key Responsibilities : 
 
-  - **Parse configurations** (HCL/JSON files). We can also use some langages like : Python and typescript
+  - **Parse configurations** (HCL/JSON files). We can also use some languages like : Python and typescript
 
   - **Build the dependency graph** (DAG) for resources.
 
@@ -60,6 +60,8 @@
   - **Parallel Execution**: Execute independent resources in parallel to improve provisioning speed. For example, if a virtual machine and a database have no dependency on each other, Terraform can create them concurrently.
 
   - **Dependency Tracking**: Track complex dependencies across multiple resources and modules, allowing Terraform to resolve dependencies automatically when changes are made.
+  - ```terraform graph ```
+  - or ```terraform graph > graph.dot```
 
 ***
 
@@ -113,9 +115,9 @@
 
 ***
 
-**9- How does Terraform ensure state consistency across multiple cloud environments?**
+**9- How does we ensure state consistency across multiple cloud environments?**
 
-- Terraform ensures state consistency across multiple cloud environments by:
+- We ensures state consistency across multiple cloud environments by:
 
   - **Centralizing state in remote backends** for a single source of truth.
 
