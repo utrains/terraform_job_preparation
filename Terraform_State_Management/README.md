@@ -149,7 +149,7 @@
 
   ### **How to Use Workspaces:**
 
-      #### Create a Workspace:
+  #### Create a Workspace:
   
 ```
 terraform workspace new dev
