@@ -147,21 +147,21 @@
 
     - ### Terraform workspaces provide a built-in way to manage multiple environments within a single configuration. Each workspace has its own state file, allowing you to isolate environments like development, staging, and production.
 
-    - ### **How to Use Workspaces:**
+  ### **How to Use Workspaces:**
 
       - **Create a Workspace**:
+  
+```
+terraform workspace new dev
+terraform workspace new staging
+terraform workspace new production
+```
+## Switch Between Workspaces
 
 
-```terraform workspace new dev
-  terraform workspace new staging
-   terraform workspace new production```
-
-
-
-- **Switch Between Workspaces**:
-
-
- ```terraform workspace select dev```
+ ```
+ terraform workspace select dev
+```
 
 
 
