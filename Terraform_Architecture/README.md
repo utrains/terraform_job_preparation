@@ -16,9 +16,11 @@
 
 - Terraform Core, together with providers and modules, makes Terraform a powerful tool for managing complex infrastructures consistently and declaratively. Terraform Core’s have many Key Responsibilities : 
 
-  - **Parse configurations** (HCL/JSON files).
+  - **Parse configurations** (HCL/JSON files). We can also use some langages like : Python and typescript
 
   - **Build the dependency graph** (DAG) for resources.
+
+  __Example__ : command to see the graph of resources : terraform graph
 
   - **Generate and display the execution plan** for changes.
 
