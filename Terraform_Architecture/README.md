@@ -82,9 +82,7 @@
 - Terraform’s version constraints in module declarations provide:
 
   - **Controlled versioning for compatibility** and stability.
-
   - **Protection against breaking changes**.
-
   - **Consistency and reproducibility** across deployments.
 
 ***
@@ -97,11 +95,8 @@
 - Terraform handles the provider lifecycle by managing the installation, initialization, configuration, and interaction of providers during each stage of its workflow. Providers are essential plugins that allow Terraform to interact with different infrastructure services (e.g., AWS, Azure, Kubernetes), and Terraform manages them automatically to ensure they are available and properly configured when needed. Terraform handles the provider lifecycle by:
 
   - Installing providers with terraform init.
-
   - Initializing providers for secure connectivity.
-
   - Configuring provider settings in .tf files.
-
   - Managing execution by facilitating resource operations via API calls.
 
 ***
@@ -109,13 +104,9 @@
 **8- What is the process for creating custom Terraform providers?**
 
 - To create a custom Terraform provider:
-
   - Set up the development environment using Go and the Terraform Plugin SDK.
-
   - Define provider configuration and connection settings.
-
   - Implement resources and CRUD operations for managing resources.
-
   - Compile, test, document, and, optionally, publish the provider.
 
 ***
