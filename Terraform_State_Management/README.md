@@ -151,17 +151,17 @@
 
       - **Create a Workspace**:
 
-|                                                                                                |
-| ---------------------------------------------------------------------------------------------- |
-| terraform workspace new dev terraform workspace new staging terraform workspace new production |
+
+```terraform workspace new dev
+  terraform workspace new staging
+   terraform workspace new production```
 
 
 
 - **Switch Between Workspaces**:
 
-|                                |
-| ------------------------------ |
-| terraform workspace select dev |
+
+ ```terraform workspace select dev```
 
 
 
