@@ -115,7 +115,7 @@
 
 ***
 
-**9- How does we ensure state consistency across multiple cloud environments?**
+**9- How do we ensure state consistency across multiple cloud environments?**
 
 - We ensures state consistency across multiple cloud environments by:
 
